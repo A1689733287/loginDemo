@@ -10,17 +10,19 @@
 <body>
 	<table border="1" align="center">
 		<tr>
-			<td>序号</td>
 			<td>编号</td>
 			<td>姓名</td>
 			<td>密码</td>
+			<td>操作</td>
 		</tr>
 		<s:iterator var="user" value="#request.users" status="vs">
 			<tr>
-				<td><s:property value="#vs.count " /></td>
 				<td><s:property value="#user.id" /></td>
 				<td><s:property value="#user.userName" /></td>
 				<td><s:property value="#user.pwd" /></td>
+				<td>
+					<s:a href = "del.action?id =%{#user.id}">删除</s:a>
+				</td>
 			</tr>
 		</s:iterator>
 	</table>

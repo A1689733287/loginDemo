@@ -14,32 +14,31 @@ public class UserDao {
 	Connection conn = JdbcUtils.getConnection();
 	List<User> list = new ArrayList<>();
 
-	public User login(User user) {
+	public User login(User user){
 		String sql = "SELECT * FROM users WHERE username = '"+user.getUserName()+"' and userpwd = '"+user.getPwd()+"'";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			if(rs.next()){
 				return user;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			JdbcUtils.close(conn, pstmt, rs);
 		}
 		return null;
 	}
 
 	public List<User> getAll() {
 		String sql = "SELECT * FROM USERS";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String username = rs.getString("username");
@@ -51,12 +50,7 @@ public class UserDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			JdbcUtils.close(conn, pstmt, rs);
 		}
 		return list;
 	}

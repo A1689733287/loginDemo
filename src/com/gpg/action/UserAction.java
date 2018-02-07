@@ -29,7 +29,7 @@ public class UserAction extends ActionSupport {
 			if (user.getUserName().equals(userInfo.getUserName())&& user.getPwd().equals(userInfo.getPwd())) {
 				ActionContext.getContext().getContextMap().put("user", user);
 
-				return "loginSuccess";
+				return "success";
 			}
 		} catch (Exception e) {
 			return "error";
@@ -37,11 +37,11 @@ public class UserAction extends ActionSupport {
 		return null;
 	}
 
-	public String list() {
+	public String listUser() {
 		try {
 			List<User> users = userService.getAll();
 			ActionContext.getContext().getContextMap().put("users", users);
-			return "list";
+			return "listUser";
 		} catch (Exception e) {
 			return "error";
 		}

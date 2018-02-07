@@ -15,25 +15,15 @@
 
 
 	<package name="user" namespace="/" extends="struts-default">
-	<interceptors>
-			<interceptor name="loginCheck"
-				class="com.gpg.interceptor.UserCheckInterceptor"></interceptor>
-		<interceptor-stack name="myStack">
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-			<interceptor-ref name="loginCheck"></interceptor-ref>
-		</interceptor-stack>
-		</interceptors>
 		<global-results>
 			<result name="error">/error.jsp</result>
 		</global-results>
 		<action name="user_*" class="com.gpg.action.UserAction" method="{1}">
-			<interceptor-ref name="myStack"></interceptor-ref> 
-			<result name="loginSuccess" type="redirectAction">
-				<param name="actionName">user_list</param>
-				<param name="namespace">/</param>
+			<result name="success" type="redirectAction">
+				user_listUser.action
 			</result>
 			<result name="input">/index.jsp</result>
-			<result name="list">/list.jsp</result>
+			<result name="listUser">/list.jsp</result>
 		</action>
 	</package>
 
