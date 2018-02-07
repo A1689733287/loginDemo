@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<!-- <constant name="struts.enable.DynamicMethodInvocation" value="false" 
+		/> <constant name="struts.devMode" value="true" /> <constant name="struts.ui.theme" 
+		value="simple" /> <constant name="struts.action.extension" value="action" 
+		/> -->
+	<!-- <package name="default" namespace="/" extends="struts-default"> <action 
+		name="hello" class="com.gpg.action.HelloAction" method="execute"> <result 
+		name="success">/success.jsp</result> </action> </package> -->
+
+
+	<package name="user" namespace="/" extends="struts-default">
+	<interceptors>
+			<interceptor name="loginCheck"
+				class="com.gpg.interceptor.UserCheckInterceptor"></interceptor>
+		<interceptor-stack name="myStack">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginCheck"></interceptor-ref>
+		</interceptor-stack>
+		</interceptors>
+		<global-results>
+			<result name="error">/error.jsp</result>
+		</global-results>
+		<action name="user_*" class="com.gpg.action.UserAction" method="{1}">
+			<interceptor-ref name="myStack"></interceptor-ref> 
+			<result name="loginSuccess" type="redirectAction">
+				<param name="actionName">user_list</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="input">/index.jsp</result>
+			<result name="list">/list.jsp</result>
+		</action>
+	</package>
+
+
+</struts>
