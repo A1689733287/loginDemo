@@ -12,6 +12,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 public class JdbcUtils {
 	private final static ThreadLocal<Connection> LOCAL = new ThreadLocal<>();
 	private static DataSource dataSource = null;
+
 	static {
 		dataSource = new ComboPooledDataSource("mysql");
 	}
@@ -51,6 +52,22 @@ public class JdbcUtils {
 	public static void close(ResultSet rs) {
 		try {
 			if (rs != null && !rs.isClosed()) {
+				rs.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
+		try {
+			if (rs != null) {
+				rs.close();
+			}
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if (rs != null) {
 				rs.close();
 			}
 		} catch (SQLException e) {
