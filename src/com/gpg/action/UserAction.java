@@ -43,7 +43,7 @@ public class UserAction extends ActionSupport {
 		return null;
 	}
 
-	public String listUser() {
+	public String list() {
 		try {
 			List<User> users = userService.getAll();
 			ActionContext.getContext().getContextMap().put("users", users);
@@ -64,7 +64,7 @@ public class UserAction extends ActionSupport {
 	}
 	
 	public String del() {
-		if (userService.delete(getId())) {
+		if (userService.delete(id)) {
 			return "delSuccess";
 		}return "input";
 	}
