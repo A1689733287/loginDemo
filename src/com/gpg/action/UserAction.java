@@ -8,6 +8,12 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UserAction extends ActionSupport {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	private User user;
 
 	private UserService userService = new UserService();
@@ -19,14 +25,14 @@ public class UserAction extends ActionSupport {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	
 	public String login() {
 		try {
 			User userInfo = userService.login(user);
 			if (userInfo == null) {
 				return "input";
 			}
-			if (user.getUserName().equals(userInfo.getUserName())&& user.getPwd().equals(userInfo.getPwd())) {
+			if (user.getUserName().equals(userInfo.getUserName()) && user.getPwd().equals(userInfo.getPwd())) {
 				ActionContext.getContext().getContextMap().put("user", user);
 
 				return "success";
@@ -46,5 +52,23 @@ public class UserAction extends ActionSupport {
 			return "error";
 		}
 	}
+
+
+	private Integer id;
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	public String del() {
+		if (userService.delete(getId())) {
+			return "delSuccess";
+		}return "input";
+	}
+
+	
 
 }

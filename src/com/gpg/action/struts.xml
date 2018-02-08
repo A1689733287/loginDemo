@@ -24,6 +24,7 @@
 			</result>
 			<result name="input">/index.jsp</result>
 			<result name="listUser">/list.jsp</result>
+			<result name="delSuccess" type="redirectAction">user_list</result>
 		</action>
 	</package>
 
