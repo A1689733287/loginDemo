@@ -15,4 +15,8 @@ public class UserService {
 	public List<User> getAll() {
 		return userDao.getAll();
 	}
+	
+	public boolean delete(int id) {
+		return userDao.delete(id);
+	}
 }

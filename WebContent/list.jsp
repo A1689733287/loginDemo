@@ -21,7 +21,7 @@
 				<td><s:property value="#user.userName" /></td>
 				<td><s:property value="#user.pwd" /></td>
 				<td>
-					<s:a href = "del.action?id =%{#user.id}">删除</s:a>
+					<s:a href = "user_del.action?id =%{#user.id}">删除</s:a>
 				</td>
 			</tr>
 		</s:iterator>

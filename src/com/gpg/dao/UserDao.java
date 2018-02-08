@@ -14,14 +14,15 @@ public class UserDao {
 	Connection conn = JdbcUtils.getConnection();
 	List<User> list = new ArrayList<>();
 
-	public User login(User user){
-		String sql = "SELECT * FROM users WHERE username = '"+user.getUserName()+"' and userpwd = '"+user.getPwd()+"'";
+	public User login(User user) {
+		String sql = "SELECT * FROM users WHERE username = '" + user.getUserName() + "' and userpwd = '" + user.getPwd()
+				+ "'";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			if(rs.next()){
+			if (rs.next()) {
 				return user;
 			}
 		} catch (SQLException e) {
@@ -53,5 +54,24 @@ public class UserDao {
 			JdbcUtils.close(conn, pstmt, rs);
 		}
 		return list;
+	}
+
+	public boolean delete(int id) {
+		String sql = "delete from users where id = ?";
+		PreparedStatement pstmt = null;
+		int rs;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeUpdate();
+			if (rs > 0){
+				return true;
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtils.close(conn, pstmt, null);
+		}
+		return false;
+
 	}
 }
