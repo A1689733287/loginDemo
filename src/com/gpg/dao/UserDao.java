@@ -48,7 +48,6 @@ public class UserDao {
 				list.add(user);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			JdbcUtils.close(conn, pstmt, rs);
@@ -62,8 +61,9 @@ public class UserDao {
 		int rs;
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
 			rs = pstmt.executeUpdate();
-			if (rs > 0){
+			if (rs > 0) {
 				return true;
 			}
 		} catch (SQLException e) {
