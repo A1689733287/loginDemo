@@ -36,47 +36,7 @@ public class JdbcUtils {
 		return conn;
 	}
 
-	/**
-	 * 关闭数据库的连接
-	 * @param Connection连接参数
-	 */
-	public static void close(Connection conn) {
-		try {
-			if (conn != null && !conn.isClosed()) {
-				conn.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * 关闭PreparedStatement预编译对象
-	 * @param pstmt PreparedStatement对象
-	 */
-	public static void close(PreparedStatement pstmt) {
-		try {
-			if (pstmt != null && !pstmt.isClosed()) {
-				pstmt.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 关闭结果集对象
-	 * @param ResultSet结果集
-	 */
-	public static void close(ResultSet rs) {
-		try {
-			if (rs != null && !rs.isClosed()) {
-				rs.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+		
 	/**
 	 * 关闭连接
 	 * @param conn Connection对象
@@ -94,6 +54,7 @@ public class JdbcUtils {
 			if (conn != null) {
 				conn.close();
 			}
+			remove();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -110,4 +71,5 @@ public class JdbcUtils {
 	public static void remove() {
 		LOCAL.remove();
 	}
+	
 }
