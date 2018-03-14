@@ -33,7 +33,7 @@ public class UserAction extends ActionSupport {
 				return "input";
 			}
 			if (user.getUserName().equals(userInfo.getUserName()) && user.getPwd().equals(userInfo.getPwd())) {
-				ActionContext.getContext().getContextMap().put("user", user);
+				ActionContext.getContext().getSession().put("user", user);
 
 				return "success";
 			}

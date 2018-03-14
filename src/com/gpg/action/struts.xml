@@ -4,11 +4,26 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
+<constant name="struts.custom.i18n.resources" value="com.gpg.config.msg"></constant>
 
 	<package name="user" namespace="/" extends="struts-default">
+	
+	<!--  -->	
+		<interceptors>
+			<interceptor name="login" class="com.gpg.intercept.LoginInterceptor"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="login"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
+		
 		<global-results>
 			<result name="error">/error.jsp</result>
 		</global-results>
+		
+		
 		<action name="user_*" class="com.gpg.action.UserAction" method="{1}">
 			<result name="success" type="redirectAction">
 				user_list.action

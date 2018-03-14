@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title><s:text name="title"></s:text></title>
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/user_login.action" method="post">
